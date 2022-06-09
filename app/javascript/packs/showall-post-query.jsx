@@ -1,8 +1,8 @@
-import React from 'react';
-import gql from 'graphql-tag';
+import React from "react";
+import gql from "graphql-tag";
 
 const PostQuery = gql`
-query PostsPage {
+  query PostsPage {
     viewer {
       id
     }
@@ -32,7 +32,7 @@ query PostsPage {
         id
       }
     }
-}
+  }
 `;
 
-export default PostQuery
+export default PostQuery;
