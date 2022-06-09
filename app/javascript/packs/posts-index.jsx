@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "react-apollo";
 import renderComponent from "./utils/renderComponent";
-import PostQuery from "./showall-post-query";
+import ShowAllPostQuery from "../graphql-queries/ShowAllPostQuery";
 
 function PostsIndex() {
-  const { data, loading, error } = useQuery(PostQuery);
+  const { data, loading, error } = useQuery(ShowAllPostQuery);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;

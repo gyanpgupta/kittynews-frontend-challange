@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import PostQuery from "./showall-post-query";
+import ShowAllPostQuery from "../../graphql-queries/ShowAllPostQuery";
 
 const NewLaunches = () => {
-  const { data, loading, error } = useQuery(PostQuery);
+  const { data, loading, error } = useQuery(ShowAllPostQuery);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;

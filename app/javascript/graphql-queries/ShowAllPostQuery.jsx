@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 
-const PostQuery = gql`
+const ShowAllPostQuery = gql`
   query PostsPage {
     viewer {
       id
@@ -35,4 +35,4 @@ const PostQuery = gql`
   }
 `;
 
-export default PostQuery;
+export default ShowAllPostQuery;

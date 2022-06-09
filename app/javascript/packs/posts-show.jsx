@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import renderComponent from "./utils/renderComponent";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
-import IndividualPost from "./individual-post";
+import Post from "../components/post-headers/Post";
 
 function PostsShow({ postId }) {
   const showQuery = gql`
@@ -12,7 +12,7 @@ function PostsShow({ postId }) {
         username
         image
       }
-      post(id: 1) {
+      post(id: ${postId}) {
         id
         title
         tagline
@@ -57,7 +57,7 @@ function PostsShow({ postId }) {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  return <IndividualPost post={data.post} currentUser={data.viewer} />;
+  return <Post post={data.post} currentUser={data.viewer} />;
 }
 
 renderComponent(PostsShow);
