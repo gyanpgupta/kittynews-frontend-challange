@@ -16,6 +16,12 @@ chdir APP_ROOT do
   system('bundle check') || system!('bundle install')
   system('bin/yarn')
 
+  system('rails db:create')
+
+
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
+
+  puts "============== Now you can run this command for running the app =============\n\n"
+  puts "\e[#{32}mbin/dev\e[0m"
 end

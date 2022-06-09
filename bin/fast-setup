@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo -u postgres createuser -s -i -d -r -l -w rails
+sudo -u postgres psql -c "ALTER ROLE rails WITH PASSWORD 'rails';"
+
+gem install bundler:1.17.3
+
+bundle install
+
+rails db:create
+rails db:migrate
+rails db:seed
+bin/setup

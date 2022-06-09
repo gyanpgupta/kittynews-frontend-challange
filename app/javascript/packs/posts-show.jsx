@@ -1,29 +1,74 @@
-import * as React from 'react';
-import renderComponent from './utils/renderComponent';
+import React, { Fragment } from "react";
+import renderComponent from "./utils/renderComponent";
+import { useQuery } from "react-apollo";
+import gql from "graphql-tag";
 
 function PostsShow({ postId }) {
   const post = { user: {} };
+  const showQuery = gql`
+    query PostsPage {
+      viewer {
+        id
+      }
+      post(id: ${postId}) {
+        id
+        title
+        tagline
+        url
+        commentsCount
+        votesCount
+        isVoted
+        description
+        viewsCount
+        dailyFeedPosition
+        weeklyFeedPosition
+        image
+        makers {
+          id
+        }
+        user {
+          id
+        }
+        commenters {
+          id
+        }
+        voters {
+          id
+        }
+      }
+    }
+  `;
+
+  const { data, loading, error } = useQuery(showQuery);
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
 
   return (
-    <>
+    <Fragment>
       <div className="box">
-        <strong>TODO: Show info about post with id {postId}.</strong>
+        <img src={data.post.image}/>
+        <strong>{data.post.title}.</strong>
         <br />
-        <em>Find js file at "app/javascript/packs/posts-show.jsx"</em>
+        <em>{data.post.tagline}</em>
       </div>
       <div className="box">
         <article className="post">
-          <h2>
-            <a href={`/posts/${post.id}`}>{post.title}</a>
-          </h2>
+        <a href={data.post.url}>
+          <button>
+            Visit
+          </button>
+          </a>
           <div className="url">
-            <a href={post.url} target="_blank">
-              {post.url}
-            </a>
+           <button>
+             UPVOTE {data.post.votesCount}
+           </button>
           </div>
-          <div className="tagline">{post.tagline}</div>
+          <div className="tagline">{data.post.description}</div>
+          <div>
+            {data}
+          </div>
           <footer>
-            <button>🔼 0 </button> {post.commentsCount} comments | author:{' '}
+            <button>🔼 0 </button> {post.commentsCount} comments | author:{" "}
             {post.user.name}
           </footer>
         </article>
@@ -31,7 +76,7 @@ function PostsShow({ postId }) {
       <div className="box">
         <strong>TODO: Show post comments</strong>
       </div>
-    </>
+    </Fragment>
   );
 }
 
