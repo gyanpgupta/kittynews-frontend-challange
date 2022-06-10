@@ -12,6 +12,10 @@ import CommentsSection from "../comments/CommentsSection";
 //Post Styled Componenets
 import * as PSC from "./PostStyledComponent";
 
+//Assets
+import ArrowUp from "../../../assets/images/arrow-up-white.png";
+import LaunchStatistics from "../footer-new-launches/LaunchStatistics";
+
 const Post = ({ post, currentUser }) => {
   const upVoteIncrease = gql`mutation MeraMutation {
     voteAdd(postId: ${post.id}) {
@@ -61,60 +65,60 @@ const Post = ({ post, currentUser }) => {
   };
   return (
     <Fragment>
-      <div className="box">
-        {/* section 1 */}
-        <PSC.PostImageHeader src={post.image} />
-        <p>
-          {" "}
-          <strong>{post.title}.</strong>
-        </p>
-        <PSC.HeaderContainer>
-          <PSC.PostTagLine>{post.tagline}</PSC.PostTagLine>
-          <PSC.UpVoteSection>
-            <a href={post.url}>
-              <PSC.VisitButton>Visit</PSC.VisitButton>
-            </a>
-            <div className="url">
-              <PSC.UpVoteButton
-                onClick={() =>
-                  checkValidateVote()
-                    ? upVoteDecreaseMutation()
-                    : upVoteIncreaseMutation()
-                }
-              >
-                🔼 UPVOTE {post.votesCount}
-              </PSC.UpVoteButton>
+      {currentUser ? (
+        <div className="box">
+          <div>
+            {/* section 1 */}
+            <PSC.PostImageHeader src={post.image} />
+            <p>
+              {" "}
+              <strong>{post.title}.</strong>
+            </p>
+            <PSC.HeaderContainer>
+              <PSC.PostTagLine>{post.tagline}</PSC.PostTagLine>
+              <PSC.UpVoteSection>
+                <a href={post.url}>
+                  <PSC.VisitButton>Visit</PSC.VisitButton>
+                </a>
+                <div className="url">
+                  <PSC.UpVoteButton
+                    onClick={() =>
+                      checkValidateVote()
+                        ? upVoteDecreaseMutation()
+                        : upVoteIncreaseMutation()
+                    }
+                  >
+                    <img src={ArrowUp} /> UPVOTE {post.votesCount}
+                  </PSC.UpVoteButton>
+                </div>
+              </PSC.UpVoteSection>
+            </PSC.HeaderContainer>
+            <PSC.PostDescriptionSection className="box">
+              <article className="post">
+                <div className="tagline">{post.description}</div>
+              </article>
+            </PSC.PostDescriptionSection>
+
+            {/* section 2 */}
+            <div style={{ display: "flex", gap: "12px" }}>
+              <ListUsersAvatar post={post} />
             </div>
-          </PSC.UpVoteSection>
-        </PSC.HeaderContainer>
-        <PSC.PostDescriptionSection className="box">
-          <article className="post">
-            <div className="tagline">{post.description}</div>
-          </article>
-        </PSC.PostDescriptionSection>
+          </div>
 
-        {/* section 2 */}
-        <PSC.ShowPostAvatarWrapper>
-          <ListUsersAvatar post={post} />
-        </PSC.ShowPostAvatarWrapper>
-      </div>
+          {/* section 3 */}
+          <PSC.PostCommentWrapper>
+            <CommentsSection currentUser={currentUser} post={post} />
+          </PSC.PostCommentWrapper>
 
-      {/* section 3 */}
-      <div className="box">
-        <CommentsSection currentUser={currentUser} post={post} />
-      </div>
+          {/* section 4 */}
+          <LaunchStatistics post={post} />
 
-      {/* section 4 */}
-      <div>
-        <strong>Upvotes {post.votesCount} | </strong>
-        <strong>Comments {post.commentsCount} | </strong>
-        <strong>Views {post.viewsCount} | </strong>
-        <strong>Daily Rank #{post.dailyFeedPosition} | </strong>
-        <strong>Weekly Rank #{post.weeklyFeedPosition} | </strong>
-      </div>
-
-      {/* section 5 */}
-      <NewLaunches />
+          {/* section 5 */}
+          <NewLaunches />
+        </div>
+      ) : (
+        "Please Click to Login and Try again"
+      )}
     </Fragment>
   );
 };

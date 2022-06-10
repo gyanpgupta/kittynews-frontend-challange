@@ -23,3 +23,30 @@ export const CommentTextarea = styled.textarea`
   outline: none;
   cursor: text;
 `;
+
+export const CommentUserWrapper = styled.p`
+  font-weight: 600;
+  color: #000;
+`;
+
+export const CommentUserNameWrapper = styled.p`
+  color: #828282;
+  margin-left: 8px;
+`;
+export const CommentDescriptionWrapper = styled.div`
+  color: #828282;
+  font-weight: 400;
+  font-size: 12px;
+`;
+
+export const CommentInfoSection = styled.div`
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+`;
+
+export const CommentInfoText = styled.p`
+  color: #000;
+  font-weight: 600;
+  font-size: 12px;
+`;

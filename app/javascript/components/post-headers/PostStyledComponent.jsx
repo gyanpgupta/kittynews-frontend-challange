@@ -21,7 +21,7 @@ export const UpVoteSection = styled.div`
 
 export const VisitButton = styled.button`
   border: solid 1px #dddddd;
-  background-olor: white;
+  background-color: white;
   padding: 10px 18px;
   border-radius: 4px;
   cursor: pointer;
@@ -33,6 +33,10 @@ export const UpVoteButton = styled.button`
   border-radius: 4px;
   color: white;
   cursor: pointer;
+  img {
+    width: 10px;
+    margin-right: 8px;
+  }
 `;
 
 export const PostDescriptionSection = styled.div`
@@ -50,3 +54,9 @@ export const ShowPostAvatarWrapper = styled.div`
   gap: 10px;
   margin-top: 30px;
 `;
+
+export const PostCommentWrapper = styled.div`
+border-top: solid 1px #e5e5e5;
+padding-top: 12px;
+margin-top: 20px;
+`

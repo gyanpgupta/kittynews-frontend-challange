@@ -57,7 +57,15 @@ function PostsShow({ postId }) {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  return <Post post={data.post} currentUser={data.viewer} />;
+  return (
+    <Fragment>
+      {data.viewer ? (
+        <Post post={data.post} currentUser={data.viewer} />
+      ) : (
+        "Please Login and try again"
+      )}
+    </Fragment>
+  );
 }
 
 renderComponent(PostsShow);
