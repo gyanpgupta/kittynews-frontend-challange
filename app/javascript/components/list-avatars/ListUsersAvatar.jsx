@@ -1,4 +1,6 @@
 import React, { Fragment } from "react";
+
+//Avatar Styled Components
 import * as ASC from "./AvatarStyledComponet";
 
 const ListUsersAvatar = ({ post }) => {

@@ -1,4 +1,6 @@
 import React, { Fragment } from "react";
+
+//GraphQL
 import { useQuery } from "@apollo/react-hooks";
 import ShowAllPostQuery from "../../graphql-queries/ShowAllPostQuery";
 

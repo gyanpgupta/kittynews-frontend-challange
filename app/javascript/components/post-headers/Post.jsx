@@ -1,14 +1,19 @@
 import React, { Fragment } from "react";
+
+//GraphQL
 import gql from "graphql-tag";
 import { useMutation } from "react-apollo";
+
+//Components
 import NewLaunches from "../footer-new-launches/NewLaunches";
-import * as PSC from "./PostStyledComponent";
 import ListUsersAvatar from "../list-avatars/ListUsersAvatar";
 import CommentsSection from "../comments/CommentsSection";
 
+//Post Styled Componenets
+import * as PSC from "./PostStyledComponent";
+
 const Post = ({ post, currentUser }) => {
-  const upVoteIncrease = gql`
-  mutation MeraMutation {
+  const upVoteIncrease = gql`mutation MeraMutation {
     voteAdd(postId: ${post.id}) {
       post {
         id
@@ -32,16 +37,21 @@ const Post = ({ post, currentUser }) => {
     }
   }`;
 
+  //GraphQL uery Function to increase votes
   const [upVoteIncreaseMutation] = useMutation(upVoteIncrease, {
     variables: {
       postId: post.id,
     },
   });
+
+  //GraphQL uery Function to decrease votes
   const [upVoteDecreaseMutation] = useMutation(upVoteDecrease, {
     variables: {
       postId: post.id,
     },
   });
+
+  //Function to validate the vote
   const checkValidateVote = () => {
     if (post) {
       return post.voters.some((user) => user.id === currentUser.id);
