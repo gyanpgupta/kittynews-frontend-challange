@@ -17,7 +17,7 @@ import ArrowUp from "../../../assets/images/arrow-up-white.png";
 import LaunchStatistics from "../footer-new-launches/LaunchStatistics";
 
 const Post = ({ post, currentUser }) => {
-  const upVoteIncrease = gql`mutation MeraMutation {
+  const voteIncrease = gql`mutation MeraMutation {
     voteAdd(postId: ${post.id}) {
       post {
         id
@@ -29,7 +29,7 @@ const Post = ({ post, currentUser }) => {
     }
   }`;
 
-  const upVoteDecrease = gql`mutation MeraMutation {
+  const voteDecrease = gql`mutation MeraMutation {
     voteRemove(postId: ${post.id}) {
       post {
         id
@@ -41,28 +41,30 @@ const Post = ({ post, currentUser }) => {
     }
   }`;
 
-  //GraphQL uery Function to increase votes
-  const [upVoteIncreaseMutation] = useMutation(upVoteIncrease, {
+  //GraphQL query Function to increase votes
+  const [voteIncreaseMutation] = useMutation(voteIncrease, {
     variables: {
       postId: post.id,
     },
   });
 
-  //GraphQL uery Function to decrease votes
-  const [upVoteDecreaseMutation] = useMutation(upVoteDecrease, {
+  //GraphQL query Function to decrease votes
+  const [voteDecreaseMutation] = useMutation(voteDecrease, {
     variables: {
       postId: post.id,
     },
-  });
+  }
+);
 
   //Function to validate the vote
   const checkValidateVote = () => {
     if (post) {
-      return post.voters.some((user) => user.id === currentUser.id);
+      return post.voters.some((user) => user.id === currentUser.id)
     } else {
       return false;
     }
   };
+
   return (
     <Fragment>
       {currentUser ? (
@@ -84,11 +86,11 @@ const Post = ({ post, currentUser }) => {
                   <PSC.UpVoteButton
                     onClick={() =>
                       checkValidateVote()
-                        ? upVoteDecreaseMutation()
-                        : upVoteIncreaseMutation()
+                        ? voteDecreaseMutation()
+                        : voteIncreaseMutation()
                     }
                   >
-                    <img src={ArrowUp} /> UPVOTE {post.votesCount}
+                    <img style={{transform: `${post.voters.some((user) => user.id === currentUser.id)? "rotate(180deg)": ""}`}} src={ArrowUp} /> UPVOTE {post.votesCount}
                   </PSC.UpVoteButton>
                 </div>
               </PSC.UpVoteSection>

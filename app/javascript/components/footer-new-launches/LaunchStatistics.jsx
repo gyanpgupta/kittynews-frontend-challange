@@ -1,6 +1,6 @@
 import React from "react";
 
-//Launch Styled Components
+//Launch Styled Component
 import * as LSC from "./LaunchStyledComponents";
 
 const LaunchStatistics = ({ post }) => {

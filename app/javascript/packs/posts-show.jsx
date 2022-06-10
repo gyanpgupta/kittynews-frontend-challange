@@ -30,6 +30,7 @@ function PostsShow({ postId }) {
         }
         user {
           id
+          image
         }
         comments {
           id
@@ -48,6 +49,7 @@ function PostsShow({ postId }) {
         }
         voters {
           id
+          image
         }
       }
     }

@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 //Comments Styled Components
 import * as CSC from "./CommentsStyledComponent";
 
-//Avatart Styled Components
+//Avatar Styled Components
 import * as ASC from "../list-avatars/AvatarStyledComponet";
 
 //Post Styled Componenents
