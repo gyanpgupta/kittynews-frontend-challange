@@ -28,7 +28,6 @@ export const VisitButton = styled.button`
 `;
 export const UpVoteButton = styled.button`
   border: solid 1px #ff6115;
-  background-color: #ff6115;
   padding: 10px 18px;
   border-radius: 4px;
   color: white;

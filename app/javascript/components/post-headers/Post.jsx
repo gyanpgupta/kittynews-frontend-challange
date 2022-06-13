@@ -64,7 +64,7 @@ const Post = ({ post, currentUser }) => {
       return false;
     }
   };
-
+  const isVoter = post.voters.some((user) => user.id === currentUser.id)
   return (
     <Fragment>
       {currentUser ? (
@@ -84,13 +84,14 @@ const Post = ({ post, currentUser }) => {
                 </a>
                 <div className="url">
                   <PSC.UpVoteButton
+                  style={isVoter ?{backgroundColor: "#ff6115"}: {backgroundColor:"grey"}}
                     onClick={() =>
                       checkValidateVote()
                         ? voteDecreaseMutation()
                         : voteIncreaseMutation()
                     }
-                  >
-                    <img style={{transform: `${post.voters.some((user) => user.id === currentUser.id)? "rotate(180deg)": ""}`}} src={ArrowUp} /> UPVOTE {post.votesCount}
+                  >        
+                    <img style={{transform:`${isVoter? "rotate(180deg)":""}`, color: "black"}} src={ArrowUp} /> {isVoter? "DOWN VOTE" : "UPVOTE"} {post.votesCount}
                   </PSC.UpVoteButton>
                 </div>
               </PSC.UpVoteSection>
